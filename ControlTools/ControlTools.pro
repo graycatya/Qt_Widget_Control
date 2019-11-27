@@ -27,7 +27,6 @@ CONFIG += c++11
 SOURCES += \
         Button/switchbutton.cpp \
         Encp/encpssl.cpp \
-        IpLabel/ipaddress.cpp \
         IpLabel/iplabeledit.cpp \
         Marquee/marquee.cpp \
         ProgressBar/progressarc.cpp \
@@ -37,7 +36,6 @@ SOURCES += \
 HEADERS += \
         Button/switchbutton.h \
         Encp/encpssl.h \
-        IpLabel/ipaddress.h \
         IpLabel/iplabeledit.h \
         Marquee/marquee.h \
         ProgressBar/progressarc.h \
