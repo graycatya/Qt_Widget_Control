@@ -1,5 +1,12 @@
 #ifndef ENCPSSL_H
 #define ENCPSSL_H
+
+/*
+ * 基于openssl加解密封装 作者:Graycatya(graycatya@163.com)
+ * 1:Base64编解码
+ * 2:Rsa非对称加解密
+*/
+
 #include "openssl/bio.h"
 #include "openssl/buffer.h"
 #include "openssl/evp.h"

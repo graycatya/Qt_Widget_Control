@@ -15,6 +15,11 @@ public:
     explicit Widget(QWidget *parent = nullptr);
     ~Widget();
 
+    void TextProgressArc( void );
+    void TextMarquee( void );
+    void TextSwitchButton( void );
+    void TextIpLabel( void );
+
 private:
     Ui::Widget *ui;
 };

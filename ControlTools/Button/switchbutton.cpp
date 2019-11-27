@@ -14,7 +14,8 @@ SwitchButton::SwitchButton(QWidget *parent) : QWidget(parent)
     m_bShowText = false;           //是否显示文字
     m_bShowCircle = false;         //显示小圆
     m_bAnimation = false;          //动画过渡
-    m_bMouseoverevent = false;
+    m_bMouseoverevent = false;     //鼠标悬停
+    m_bDisable = false;            //关闭不可点击
 
     m_BgColorOn = QColor(Qt::green);        //打开时背景颜色
     m_BgColorOff = QColor(Qt::gray);       //关闭时背景颜色
@@ -298,6 +299,12 @@ void SwitchButton::SetTextOff(QString str)
     this->update();
 }
 
+void SwitchButton::SetDisable(bool disable)
+{
+    m_bDisable = disable;
+    this->update();
+}
+
 void SwitchButton::timerAnimation()
 {
     if(m_ButtonStyle != Circle)
@@ -356,57 +363,66 @@ void SwitchButton::timerAnimation()
 
 void SwitchButton::mousePressEvent(QMouseEvent *event)
 {
-    if(event->button() == Qt::LeftButton)
+    if(m_bDisable == false)
     {
-        m_bChecked = !m_bChecked;
-        if(m_ButtonStyle != Circle)
+        if(event->button() == Qt::LeftButton)
         {
-            if(!m_bAnimation)
+            m_bChecked = !m_bChecked;
+            if(m_ButtonStyle != Circle)
             {
-                if(m_bChecked)
-                    m_nCurrentX = GetEndX();
-                else {
-                    if(m_ButtonStyle != ButtonStyle::Slide_OutCIrcle)
-                        m_nCurrentX = 0;
+                if(!m_bAnimation)
+                {
+                    if(m_bChecked)
+                        m_nCurrentX = GetEndX();
                     else {
-                        m_nCurrentX = static_cast<int>(this->height()*0.25);
+                        if(m_ButtonStyle != ButtonStyle::Slide_OutCIrcle)
+                            m_nCurrentX = 0;
+                        else {
+                            m_nCurrentX = static_cast<int>(this->height()*0.25);
+                        }
                     }
+                }
+                else {
+                    m_pTimer->start(10);
                 }
             }
             else {
-                m_pTimer->start(10);
+
             }
         }
-        else {
-
-        }
+        emit change();
+        repaint();
     }
-    emit change();
-    repaint();
 }
 
 void SwitchButton::enterEvent(QEvent *event)
 {
-    Q_UNUSED(event);
-    //qDebug() << "enterEvent";
-    m_bMouseoverevent = true;
-    if(m_bAnimation && m_ButtonStyle == Circle)
+    if(m_bDisable == false)
     {
-        m_pTimer->start(10);
+        Q_UNUSED(event);
+        //qDebug() << "enterEvent";
+        m_bMouseoverevent = true;
+        if(m_bAnimation && m_ButtonStyle == Circle)
+        {
+            m_pTimer->start(10);
+        }
+        repaint();
     }
-    repaint();
 }
 
 void SwitchButton::leaveEvent(QEvent *event)
 {
-    Q_UNUSED(event);
-    //qDebug() << "leaveEvent";
-    m_bMouseoverevent = false;
-    if(m_bAnimation  && m_ButtonStyle == Circle)
+    if(m_bDisable == false)
     {
-        m_pTimer->start(10);
+        Q_UNUSED(event);
+        //qDebug() << "leaveEvent";
+        m_bMouseoverevent = false;
+        if(m_bAnimation  && m_ButtonStyle == Circle)
+        {
+            m_pTimer->start(10);
+        }
+        repaint();
     }
-    repaint();
 }
 
 
@@ -414,32 +430,33 @@ void SwitchButton::leaveEvent(QEvent *event)
 
 void SwitchButton::paintEvent(QPaintEvent *event)
 {
-    Q_UNUSED(event);
-    QPainter painter(this);
-    painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
-    switch (m_ButtonStyle)
-    {
-        case ButtonStyle::Slide_Roundrect:
+        Q_UNUSED(event);
+        QPainter painter(this);
+        painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
+        switch (m_ButtonStyle)
         {
-            drawSlideRoundrect(&painter);
-            break;
+            case ButtonStyle::Slide_Roundrect:
+            {
+                drawSlideRoundrect(&painter);
+                break;
+            }
+            case ButtonStyle::Slide_InCircle:
+            {
+                drawSlideInCircle(&painter);
+                break;
+            }
+            case ButtonStyle::Slide_OutCIrcle:
+            {
+                drawSlideOutCIrcle(&painter);
+                break;
+            }
+            case ButtonStyle::Circle:
+            {
+                drawCircle(&painter);
+                break;
+            }
         }
-        case ButtonStyle::Slide_InCircle:
-        {
-            drawSlideInCircle(&painter);
-            break;
-        }
-        case ButtonStyle::Slide_OutCIrcle:
-        {
-            drawSlideOutCIrcle(&painter);
-            break;
-        }
-        case ButtonStyle::Circle:
-        {
-            drawCircle(&painter);
-            break;
-        }
-    }
+
 }
 
 //滑动圆角矩形

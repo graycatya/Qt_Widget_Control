@@ -1,6 +1,16 @@
 #ifndef SWITCHBUTTON_H
 #define SWITCHBUTTON_H
 
+/*
+ * 滑动按钮 作者:Graycatya(graycatya@163.com)
+ * 1:提供滑块动画与非动画
+ * 2:提供滑块形状(圆角矩形,内圆形,外圆形,圆形)
+ * 3:提供按钮不可点击
+ * 4:设置边距
+ * 5:设置提示文字
+ * 6:设置颜色
+*/
+
 #include <QWidget>
 #include <QTimer>
 
@@ -81,6 +91,7 @@ private:
     bool m_bShowCircle;         //显示小圆
     bool m_bAnimation;          //动画过渡
     bool m_bMouseoverevent;     //鼠标悬停
+    bool m_bDisable;            //按钮不可点击
 
 
     QColor m_BgColorOn;        //打开时背景颜色
@@ -119,6 +130,7 @@ public Q_SLOTS:
     void SetTextColorOff(QColor color);
     void SetTextOn(QString str);
     void SetTextOff(QString str);
+    void SetDisable(bool disable);
 
 private slots:
     void timerAnimation();

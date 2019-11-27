@@ -63,7 +63,7 @@ void ProgressArc::drawProress(QPainter *painter)
 
     //绘制进度文字
     QFont font;
-    font.setPixelSize(offset - 15);
+    font.setPixelSize(static_cast<int>(static_cast<double>(offset) * 0.7));
     painter->setFont(font);
     QString strValue = QString("%1%").arg((this->dvalue/360.0)*100);
     painter->drawText(rectCircle, Qt::AlignCenter, strValue);

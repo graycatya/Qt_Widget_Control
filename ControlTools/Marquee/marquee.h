@@ -1,6 +1,24 @@
 #ifndef MARQUEE_H
 #define MARQUEE_H
 
+/*
+ * 文字滚动(不卡版)此控件不可在arm平台运行(此控件消耗cpu) 作者:Graycatya(graycatya@163.com)
+ * 1:设置字体
+ * 2:设置字体颜色
+ * 3:添加跑马灯字符串
+ * 4:设置跑马灯字符串组
+ * 5:设置跑马灯速度
+*/
+
+/*
+ * 1.根据字符串自动设置宽度和高度
+ * 2.速度分3级 慢速，普通速度，快速
+ * 3.可切换跑马灯内容
+ * 4.长字符串使用分割处理
+ * 注意:跑马灯是一个消耗CPU的控件，如需使用性能级的跑马灯建议使用qml，
+ * 不推荐使用openglwidget因为它的渲染引擎是用了QOpenGLPaintDevice优化上没有qml的渲染引擎Qt Scene Grap好
+*/
+
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
@@ -14,14 +32,8 @@
 #include <QTimer>
 #include <QMutex>
 #include <QWaitCondition>
-#include "ThreadPool.h"
+#include "ThreadPool/ThreadPool.h"
 
-/*
- * 1.根据字符串自动设置宽度和高度
- * 2.速度分3级 慢速，普通速度，快速
- * 3.可切换跑马灯内容
- * 4.长字符串使用分割处理
-*/
 
 class Marquee : public QWidget
 {

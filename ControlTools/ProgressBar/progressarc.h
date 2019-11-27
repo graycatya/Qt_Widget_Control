@@ -1,6 +1,16 @@
 #ifndef PROGRESSARC_H
 #define PROGRESSARC_H
 
+/*
+ * 圆形进度条 作者:Graycatya(graycatya@163.com)
+ * 1:设置字体
+ * 2:线条颜色
+ * 3:边框宽度
+ * 4:边框颜色
+ * 5:背景颜色
+ * 6:手动设置参数
+*/
+
 #include <QWidget>
 #include <QTimer>
 
