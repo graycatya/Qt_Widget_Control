@@ -3,7 +3,6 @@
 #include "ProgressBar/progressarc.h"
 #include "Marquee/marquee.h"
 #include "Button/switchbutton.h"
-#include "IpLabel/ipaddress.h"
 #include "IpLabel/iplabeledit.h"
 #include <QSlider>
 Widget::Widget(QWidget *parent) :
@@ -113,8 +112,4 @@ void Widget::TextIpLabel()
 
     iplabeledit->Clear();
 
-    /*
-    IPAddress *ipaddress = new IPAddress(this);
-    ipaddress->setIP("192.168.3.175");
-    ipaddress->sizeHint(10);*/
 }
