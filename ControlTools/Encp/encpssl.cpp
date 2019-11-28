@@ -29,11 +29,10 @@ char * EncpSsl::Base64Encode(const char * input, int length, bool with_new_line)
     b64 = BIO_push(b64, bmem);
     BIO_write(b64, input, length);
     BIO_ctrl(b64,BIO_CTRL_FLUSH,0,nullptr);
-    //BIO_flush(b64);
     BIO_ctrl(b64,BIO_C_GET_BUF_MEM_PTR, 0, &bptr);
-    //BIO_get_mem_ptr(b64, &bptr);
 
-    char * buff = new char[bptr->length + 1];//(char *)malloc(bptr->length + 1);
+
+    char * buff = new char[bptr->length + 1];
     memcpy(buff, bptr->data, bptr->length);
     buff[bptr->length] = 0;
 
@@ -46,7 +45,7 @@ char * EncpSsl::Base64Decode(char * input, int length, bool with_new_line)
 {
     BIO * b64 = nullptr;
     BIO * bmem = nullptr;
-    char * buffer = new char[length];//(char *)malloc(length);
+    char * buffer = new char[length];
     memset(buffer, 0, static_cast<size_t>(length));
 
     b64 = BIO_new(BIO_f_base64());
@@ -76,7 +75,6 @@ std::string EncpSsl::Base64Encode(const std::string input, bool with_new_line)
     b64 = BIO_push(b64, bmem);
     BIO_write(b64, input.c_str(), static_cast<int>(input.size()));
     BIO_ctrl(b64,BIO_CTRL_FLUSH,0,nullptr);
-    //BIO_flush(b64);
     BIO_ctrl(b64,BIO_C_GET_BUF_MEM_PTR, 0, &bptr);
 
     char * buff = new char[bptr->length + 1];
@@ -93,7 +91,7 @@ std::string EncpSsl::Base64Decode(std::string input, bool with_new_line)
     BIO * b64 = nullptr;
     BIO * bmem = nullptr;
     std::string buff;
-    char * buffer = new char[input.size()];//(char *)malloc(input.size());
+    char * buffer = new char[input.size()];
     memset(buffer, 0, input.size());
 
     b64 = BIO_new(BIO_f_base64());
@@ -121,7 +119,7 @@ void EncpSsl::Rsa_InitKey(int bits)
     {
         //FAILED
     } else {
-        //获取公钥
+        //获取公钥,私钥
         size_t pub_len;
         size_t pri_len;
         char *pub_key = nullptr;
@@ -138,7 +136,6 @@ void EncpSsl::Rsa_InitKey(int bits)
         BIO_read(pri, pri_key, static_cast<int>(pri_len));
         m_sRsaPublic_Key = std::string(pub_key, pub_len);
         m_sRsaPrivate_Key = std::string(pri_key, pri_len);
-        //std::cout << "Publickey: " << Public_Key << std::endl;
         delete[] pub_key;
         pub_key = nullptr;
         delete[] pri_key;
@@ -284,10 +281,6 @@ std::string EncpSsl::Get_Rsa_Pri_Key()
 {
     return this->m_sRsaPrivate_Key;
 }
-
-
-
-
 
 std::string EncpSsl::StrToHex_Lowercase(const unsigned char* str, int length)
 {

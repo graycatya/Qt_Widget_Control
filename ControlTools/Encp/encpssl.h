@@ -42,6 +42,9 @@ public:
     std::string Get_Rsa_Pub_Key();
     std::string Get_Rsa_Pri_Key();
 
+    /* 
+      * 此功能用于md5生成后，进行行转码Hex
+    */
     //StrToHex
     std::string StrToHex_Lowercase(const unsigned char* str, int length);
     std::string StrToHex_Capital(const unsigned char* str, int length);

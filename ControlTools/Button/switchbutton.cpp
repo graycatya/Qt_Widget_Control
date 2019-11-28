@@ -131,7 +131,6 @@ void SwitchButton::drawTextorRect(QPainter *painter)
         int textwdith = static_cast<int>(this->width() * 0.2);
         font.setPixelSize(textwdith);
         pen.setColor(color);
-        //int sliderWidth = qMin(width(), height()) - m_nBlockInterval * 2;
 
         if(m_bChecked)
         {
@@ -400,7 +399,6 @@ void SwitchButton::enterEvent(QEvent *event)
     if(m_bDisable == false)
     {
         Q_UNUSED(event);
-        //qDebug() << "enterEvent";
         m_bMouseoverevent = true;
         if(m_bAnimation && m_ButtonStyle == Circle)
         {
@@ -415,7 +413,6 @@ void SwitchButton::leaveEvent(QEvent *event)
     if(m_bDisable == false)
     {
         Q_UNUSED(event);
-        //qDebug() << "leaveEvent";
         m_bMouseoverevent = false;
         if(m_bAnimation  && m_ButtonStyle == Circle)
         {

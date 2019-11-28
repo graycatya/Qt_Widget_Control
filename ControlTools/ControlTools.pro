@@ -26,6 +26,7 @@ CONFIG += c++11
 
 SOURCES += \
         Button/switchbutton.cpp \
+        ControlWidget/controlwidget.cpp \
         Encp/encpssl.cpp \
         IpLabel/iplabeledit.cpp \
         Marquee/marquee.cpp \
@@ -35,6 +36,7 @@ SOURCES += \
 
 HEADERS += \
         Button/switchbutton.h \
+        ControlWidget/controlwidget.h \
         Encp/encpssl.h \
         IpLabel/iplabeledit.h \
         Marquee/marquee.h \
