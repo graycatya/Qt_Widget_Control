@@ -19,6 +19,7 @@ public:
     void TextMarquee( void );
     void TextSwitchButton( void );
     void TextIpLabel( void );
+    void TextControlWidget( void );
 
 private:
     Ui::Widget *ui;

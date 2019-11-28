@@ -4,7 +4,11 @@
 #include "Marquee/marquee.h"
 #include "Button/switchbutton.h"
 #include "IpLabel/iplabeledit.h"
+#include "ControlWidget/controlwidget.h"
+
 #include <QSlider>
+#include <QDebug>
+
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
@@ -13,7 +17,8 @@ Widget::Widget(QWidget *parent) :
     //TextProgressArc();
     //TextMarquee();
     //TextSwitchButton();
-    TextIpLabel();
+    //TextIpLabel();
+    TextControlWidget();
 }
 
 Widget::~Widget()
@@ -111,5 +116,27 @@ void Widget::TextIpLabel()
 
 
     iplabeledit->Clear();
+
+}
+
+void Widget::TextControlWidget()
+{
+    //QSysInfo::WinVersion ver = QSysInfo::windowsVersion();
+    //qDebug() << ver;
+    ControlWidget *widget = new ControlWidget(this);
+    /*FramelessWidget *widget = new FramelessWidget(this);*/
+    this->setMinimumWidth(100);
+    this->setMinimumHeight(100);
+/*
+    Marquee *marquee = new Marquee(this);
+    marquee->setGeometry(100,100, 600, 50);
+    marquee->AddText("nokia nokia nokia nokia nokia nokia nokia nokia nokia nokia nokia nokia");
+    QFont font;
+    font.setFamily("Microsoft YaHei");
+    font.setBold(true);
+    font.setPointSize(50);
+    marquee->setFont(font);
+    marquee->SetSpeed(Marquee::Quick);
+    marquee->Start(0);*/
 
 }
